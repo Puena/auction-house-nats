@@ -45,16 +45,16 @@ type jetStreamPublish struct {
 
 // Create a new JetStreamPublisher.
 func NewJetStreamPublish(js jetstream.JetStream, opts ...jetStreamPublishOption) *jetStreamPublish {
-	o := &jetStreamPublishOptions{
+	o := jetStreamPublishOptions{
 		retryAttempts: defaultRetryAttempts,
 	}
 	for _, opt := range opts {
-		opt(o)
+		opt(&o)
 	}
 
 	return &jetStreamPublish{
 		js:      js,
-		options: *o,
+		options: o,
 	}
 }
 
